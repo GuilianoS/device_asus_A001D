@@ -68,6 +68,9 @@ on post-fs-data
     mkdir /persist/qti_fp 0700 system system
     mkdir /data/misc/seemp 0700 system system
     mkdir /data/misc/audio_pp 0771 media audio
+    #begin fingerprint config
+    mkdir /data/vendor/blfp 0700 system  system
+    #end fingerprint config
 
 #Create folder for mm-qcamera-daemon
 mkdir /data/vendor/camera 0770 camera camera
@@ -226,12 +229,29 @@ on boot
     chown system system /proc/touchpanel/wakeup_gesture
     chmod 0660 /proc/touchpanel/wakeup_gesture
 
+    #### begin fingerprint config begin ####  
+    #goodix
+    chown system system /dev/goodix_fp
+    chmod 0666 /dev/goodix_fp
+    #betterlife
+    chown system system /dev/blfp
+    chmod 0666 /dev/blfp
+    #### end fingerprint config begin ####
+    #BEGIN sunyue, 0328488 check usb connector temperture  and disable charger or otg
+    chmod 0666 /sys/class/power_supply/battery/charging_enabled
+    chmod 0666 /sys/class/power_supply/usb/usb_otg
+    #END 0328488
+
 service ppd /vendor/bin/mm-pp-dpps
     class late_start
     user system
     group system graphics
     socket pps stream 0660 system system
     disabled
+
+service btlfpserver /vendor/bin/hw/btlfpserver
+    class late_start
+    user system
 
 on property:sys.boot_completed=1
     # Enable ZRAM on boot_complete

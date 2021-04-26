@@ -94,7 +94,7 @@ BLUETOOTH_HCI_USE_MCT := true
 
 # Camera
 TARGET_PROCESS_SDK_VERSION_OVERRIDE := \
-    /system/vendor/bin/mm-qcamera-daemon=28
+/system/vendor/bin/mm-qcamera-daemon=28
 USE_DEVICE_SPECIFIC_CAMERA := true
 BOARD_USES_SNAPDRAGONCAMERA_VERSION := 2
 BOARD_QTI_CAMERA_32BIT_ONLY := true
@@ -102,7 +102,7 @@ TARGET_TS_MAKEUP := true
 
 # Shims
 TARGET_LD_SHIM_LIBS := \
-    /vendor/lib/hw/camera.msm8953.so|camera_shims.so
+/vendor/lib/hw/camera.msm8953.so|camera_shims.so
 
 # Cpusets
 ENABLE_CPUSETS := true
@@ -135,6 +135,9 @@ BOARD_CACHEIMAGE_FILE_SYSTEM_TYPE := ext4
 BOARD_VENDORIMAGE_FILE_SYSTEM_TYPE := ext4
 TARGET_USERIMAGES_USE_EXT4 := true
 TARGET_COPY_OUT_VENDOR := vendor
+TARGET_RECOVERY_UI_BLANK_UNBLANK_ON_INIT := true
+BOARD_HAS_LARGE_FILESYSTEM := true
+TARGET_RECOVERY_FSTAB := $(DEVICE_PATH)/rootdir/etc/fstab.qcom
 
 # FM
 BOARD_HAVE_QCOM_FM := true
@@ -167,9 +170,9 @@ BOARD_CACHEIMAGE_PARTITION_SIZE := 268435456
 BOARD_RECOVERYIMAGE_PARTITION_SIZE := 67108864
 BOARD_VENDORIMAGE_PARTITION_SIZE := 838860800
 BOARD_ROOT_EXTRA_SYMLINKS := \
-    /vendor/dsp:/dsp \
-    /vendor/firmware_mnt:/firmware \
-    /mnt/vendor/persist:/persist
+/vendor/dsp:/dsp \
+/vendor/firmware_mnt:/firmware \
+/mnt/vendor/persist:/persist
 
 # Peripheral manager
 TARGET_PER_MGR_ENABLED := true

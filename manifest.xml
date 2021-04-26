@@ -19,7 +19,7 @@
         </interface>
         <fqname>@6.0::IEffectsFactory/default</fqname>
     </hal>
-    <hal format="hidl">
+        <hal format="hidl">
         <name>android.hardware.biometrics.fingerprint</name>
         <transport>hwbinder</transport>
         <version>2.1</version>
@@ -50,14 +50,24 @@
         <fqname>@2.4::ICameraProvider/legacy/0</fqname>
     </hal>
     <hal format="hidl">
-        <name>android.hardware.configstore</name>
+        <name>vendor.goodix.hardware.fingerprint</name>
         <transport>hwbinder</transport>
-        <version>1.1</version>
+        <version>1.0</version>
         <interface>
-            <name>ISurfaceFlingerConfigs</name>
+            <name>IGoodixBiometricsFingerprint</name>
             <instance>default</instance>
         </interface>
-        <fqname>@1.1::ISurfaceFlingerConfigs/default</fqname>
+        <fqname>@1.0::IGoodixBiometricsFingerprint/default</fqname>
+    </hal>
+    <hal format="hidl">
+        <name>vendor.hardware.betterlife.fingerprint</name>
+        <transport>hwbinder</transport>
+        <version>1.0</version>
+        <interface>
+            <name>IBtlFingerprint</name>
+            <instance>default</instance>
+        </interface>
+        <fqname>@1.0::IBtlFingerprint/default</fqname>
     </hal>
     <hal format="hidl">
         <name>android.hardware.drm</name>
@@ -265,46 +275,6 @@
         <fqname>@1.0::IVibrator/default</fqname>
     </hal>
     <hal format="hidl">
-        <name>com.fingerprints.extension</name>
-        <transport>hwbinder</transport>
-        <version>1.0</version>
-        <interface>
-            <name>IFingerprintAuthenticator</name>
-            <instance>default</instance>
-        </interface>
-        <interface>
-            <name>IFingerprintCalibration</name>
-            <instance>default</instance>
-        </interface>
-        <interface>
-            <name>IFingerprintEngineering</name>
-            <instance>default</instance>
-        </interface>
-        <interface>
-            <name>IFingerprintNavigation</name>
-            <instance>default</instance>
-        </interface>
-        <interface>
-            <name>IFingerprintRecalibration</name>
-            <instance>default</instance>
-        </interface>
-        <interface>
-            <name>IFingerprintSenseTouch</name>
-            <instance>default</instance>
-        </interface>
-        <interface>
-            <name>IFingerprintSensorTest</name>
-            <instance>default</instance>
-        </interface>
-        <fqname>@1.0::IFingerprintAuthenticator/default</fqname>
-        <fqname>@1.0::IFingerprintCalibration/default</fqname>
-        <fqname>@1.0::IFingerprintEngineering/default</fqname>
-        <fqname>@1.0::IFingerprintNavigation/default</fqname>
-        <fqname>@1.0::IFingerprintRecalibration/default</fqname>
-        <fqname>@1.0::IFingerprintSenseTouch/default</fqname>
-        <fqname>@1.0::IFingerprintSensorTest/default</fqname>
-    </hal>
-    <hal format="hidl">
         <name>com.qualcomm.qti.dpm.api</name>
         <transport>hwbinder</transport>
         <version>1.0</version>
@@ -388,16 +358,6 @@
             <instance>default</instance>
         </interface>
         <fqname>@1.0::IAlarm/default</fqname>
-    </hal>
-    <hal format="hidl">
-        <name>vendor.goodix.hardware.fingerprint</name>
-        <transport>hwbinder</transport>
-        <version>1.0</version>
-        <interface>
-            <name>IGoodixBiometricsFingerprint</name>
-            <instance>default</instance>
-        </interface>
-        <fqname>@1.0::IGoodixBiometricsFingerprint/default</fqname>
     </hal>
     <hal format="hidl">
         <name>vendor.qti.data.factory</name>

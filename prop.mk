@@ -45,21 +45,6 @@ qcom.bluetooth.soc=smd \
 ro.bluetooth.hfp.ver=1.7 \
 ro.qualcomm.bt.hci_transport=smd
 
-# Camera
-PRODUCT_PROPERTY_OVERRIDES += \
-persist.camera.CDS=off \
-persist.camera.gyro.android=0 \
-persist.camera.is_type=1 \
-persist.vendor.camera.expose.aux=1 \
-persist.vendor.camera.HAL3.enabled=1 \
-persist.vendor.camera.display.lmax=1280x720 \
-persist.vendor.camera.display.umax=1920x1080 \
-vendor.camera.hal1.packagelist=com.skype.raider,com.google.android.talk,com.whatsapp \
-vendor.camera.lowpower.record.enable=1 \
-vendor.camera.aux.packagelist=org.codeaurora.snapcam,com.android.camera,com.huaqin.factory,com.mi.AutoTest \
-vendor.camera.aux.packagelist2=com.android.systemui,com.huaqin.cameraautotest,com.huaqin.runtime \
-vendor.camera.aux.packageblacklist=com.discord
-
 # Charger
 PRODUCT_PRODUCT_PROPERTIES += \
 ro.charger.disable_init_blank=true \
@@ -91,7 +76,7 @@ persist.demo.hdmirotationlock=false \
 persist.hwc.enable_vds=1 \
 persist.hwc.mdpcomp.enable=true \
 ro.opengles.version=196610 \
-ro.qualcomm.cabl=0 \
+ro.qualcomm.cabl=2 \
 ro.vendor.display.cabl=2 \
 sdm.debug.disable_skip_validate=1 \
 vendor.display.disable_skip_validate=1 \
@@ -243,17 +228,24 @@ wifi.interface=wlan0
 PRODUCT_PROPERTY_OVERRIDES += \
 persist.device_config.runtime_native.usap_pool_enabled=true
 
-# GMS
-PRODUCT_PROPERTY_OVERRIDES += \
-ro.com.google.rlzbrandcode=ASUP \
-ro.com.google.rlz_ap_whitelist=y0,y5,y6,y7,y9
-
-#Simulate sdcard on /data/media
-PRODUCT_PROPERTY_OVERRIDES += \
-persist.fuse_sdcard=true
-
 # Zram-writeback
 PRODUCT_PROPERTY_OVERRIDES += \
 ro.zram.mark_idle_delay_mins=60 \
 ro.zram.first_wb_delay_mins=180 \
 ro.zram.periodic_wb_delay_hours=24
+
+# GMS
+PRODUCT_PROPERTY_OVERRIDES += \
+ro.com.google.clientidbase=android-asus \
+ro.com.google.clientidbase.ms=android-asus \
+ro.com.google.rlzbrandcode=ASUP \
+ro.com.google.rlz_ap_whitelist=y0,y5,y6,y7,y9
+
+# Camera
+PRODUCT_PROPERTY_OVERRIDES += \
+vidc.enc.dcvs.extra-buff-count=2 \
+vendor.camera.hal1.packagelist=com.skype.raider,com.google.android.talk \
+vendor.camera.lowpower.record.enable=1 \
+persist.vendor.camera.display.umax=1920x1080 \
+persist.vendor.camera.display.lmax=1280x720 \
+vendor.camera.aux.packagelist=org.codeaurora.snapcam
