@@ -57,7 +57,6 @@ on late-init
     start themed_bootanimation
     start bootanim
     start vendor.hwcomposer-2-1
-    start vendor.configstore-hal
     start vendor.qti.hardware.display.allocator
 
 on early-boot

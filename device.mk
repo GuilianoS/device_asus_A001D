@@ -199,8 +199,6 @@ android.hardware.memtrack@1.0-impl \
 android.hardware.memtrack@1.0-service \
 vendor.display.color@1.0-service \
 vendor.display.color@1.0-impl \
-android.hardware.light@2.0-impl \
-android.hardware.light@2.0-service \
 copybit.msm8953 \
 gralloc.msm8953 \
 hwcomposer.msm8953 \
@@ -212,7 +210,13 @@ libtinyxml
 
 # Lights
 PRODUCT_PACKAGES += \
+android.hardware.light@2.0-impl \
+android.hardware.light@2.0-service \
 lights.msm8953
+
+# LiveDisplay
+PRODUCT_PACKAGES += \
+vendor.lineage.livedisplay@2.0-service-sdm
 
 # DRM
 PRODUCT_PACKAGES += \
