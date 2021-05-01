@@ -94,7 +94,9 @@ BLUETOOTH_HCI_USE_MCT := true
 
 # Camera
 TARGET_PROCESS_SDK_VERSION_OVERRIDE := \
+/vendor/bin/mm-qcamera-daemon=28 \
 /system/vendor/bin/mm-qcamera-daemon=28
+
 USE_DEVICE_SPECIFIC_CAMERA := true
 BOARD_USES_SNAPDRAGONCAMERA_VERSION := 2
 BOARD_QTI_CAMERA_32BIT_ONLY := true
@@ -102,7 +104,7 @@ TARGET_TS_MAKEUP := true
 
 # Shims
 TARGET_LD_SHIM_LIBS := \
-/vendor/lib/hw/camera.msm8953.so|camera_shims.so
+    /vendor/lib/hw/camera.msm8953.so|libshims_camera.so
 
 # Cpusets
 ENABLE_CPUSETS := true
@@ -191,7 +193,7 @@ ENABLE_VENDOR_RIL_SERVICE := true
 TARGET_RECOVERY_FSTAB := $(DEVICE_PATH)/rootdir/fstab.qcom
 
 # Security Patch Level
-VENDOR_SECURITY_PATCH := 2020-02-05
+VENDOR_SECURITY_PATCH := 2020-06-05
 
 # SELinux
 include device/qcom/sepolicy-legacy-um/SEPolicy.mk
@@ -205,6 +207,7 @@ TARGET_USES_ALTERNATIVE_MANUAL_NETWORK_SELECT := true
 
 # Treble
 BOARD_VNDK_VERSION := current
+BOARD_VNDK_RUNTIME_DISABLE := true
 BOARD_PROPERTY_OVERRIDES_SPLIT_ENABLED := true
 PRODUCT_FULL_TREBLE_OVERRIDE := true
 PRODUCT_VENDOR_MOVE_ENABLED := true
