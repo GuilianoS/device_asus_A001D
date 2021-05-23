@@ -103,15 +103,6 @@ libqcompostprocbundle \
 libvolumelistener
 
 # Fingerprint
-#PRODUCT_PACKAGES += \
-#libbacktrace-vendor
-
-# Fingerprint
-#PRODUCT_PACKAGES += \
-#libunwind \
-#libunwind.vendor
-
-# Fingerprint
 PRODUCT_PACKAGES += \
 android.hardware.biometrics.fingerprint@2.1
 
@@ -173,6 +164,8 @@ camera.device@3.4-extermal-impl \
 android.hardware.camera.provider@2.4-impl \
 android.hardware.camera.provider@2.4-service \
 vendor.qti.hardware.camera.device@1.0 \
+libgui_vendor \
+libfui \
 libshims_camera
 
 # Component overrides
