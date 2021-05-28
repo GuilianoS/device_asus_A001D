@@ -61,12 +61,15 @@ persist.debug.coresight.config=stm-events
 
 # Display
 PRODUCT_PROPERTY_OVERRIDES += \
-debug.egl.hw=0 \
+ro.hardware.egl=adreno \
+ro.hardware.vulkan=adreno \
 debug.enable.sglscale=1 \
 debug.gralloc.enable_fb_ubwc=1 \
 debug.mdpcomp.logs=0 \
 debug.sf.hw=1 \
 debug.sf.enable_hwc_vds=1 \
+debug.sf.hw=0 \
+debug.sf.latch_unsignaled=1 \
 debug.sdm.support_writeback=0 \
 debug.sf.latch_unsignaled=0 \
 debug.cpurend.vsync=false \
@@ -77,14 +80,14 @@ persist.demo.hdmirotationlock=false \
 persist.hwc.enable_vds=1 \
 persist.hwc.mdpcomp.enable=true \
 ro.opengles.version=196610 \
-ro.qualcomm.cabl=0 \
-ro.sf.lcd_density=420 \
+ro.qualcomm.cabl=2 \
+ro.sf.lcd_density=380 \
 ro.vendor.display.cabl=2 \
 sdm.debug.disable_skip_validate=1 \
 vendor.display.disable_skip_validate=1 \
 vendor.display.enable_default_color_mode=0 \
 vendor.gralloc.disable_ahardware_buffer=1 \
-vendor.gralloc.enable_fb_ubwc=1
+vendor.gralloc.enable_fb_ubwc=1 
 
 # DRM
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -126,7 +129,8 @@ vendor.vidc.enc.disable_bframes=1 \
 vendor.video.disable.ubwc=1 \
 vendor.display.enable_default_color_mode=1 \
 vendor.gralloc.enable_fb_ubwc=1 \
-vendor.video.disable.ubwc=1
+vendor.video.disable.ubwc=1 \
+media.settings.xml=/vendor/etc/media_profiles_vendor.xml
 
 # Memory optimizations
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -183,7 +187,7 @@ rild.libargs=-d/dev/smd0 \
 rild.libpath=/vendor/lib64/libril-qc-qmi-1.so \
 ro.telephony.iwlan_operation_mode=legacy \
 ro.telephony.call_ring.multiple=false \
-ro.telephony.default_network=22,20 \
+ro.telephony.default_network=9,9 \
 persist.sys.fflag.override.settings_network_and_internet_v2=true \
 service.qti.ims.enabled=1 \
 persist.vendor.vt.supported=1 \
@@ -246,19 +250,23 @@ ro.com.google.rlz_ap_whitelist=y0,y5,y6,y7,y9
 # Camera
 PRODUCT_PROPERTY_OVERRIDES += \
 vidc.enc.dcvs.extra-buff-count=2 \
-media.camera.ts.monotonic=1 \
 persist.vendor.camera.display.lmax=1280x720 \
 persist.vendor.camera.display.umax=1920x1080 \
 vendor.camera.hal1.packagelist=com.skype.raider,com.google.android.talk,com.whatsapp \
-vendor.camera.lowpower.record.enable=1 \
-vendor.camera.aux.packagelist=org.codeaurora.snapcam,com.android.camera,com.huaqin.factory,com.mi.AutoTest \
-vendor.camera.aux.packagelist2=com.android.systemui,com.huaqin.cameraautotest,com.huaqin.runtime \
-vendor.camera.aux.packageblacklist=com.discord \
-persist.vendor.qti.telephony.vt_cam_interface=2 \
-persist.vendor.camera.dual.camera=0 \
-persist.vendor.camera.eis.enable=1 \
-persist.vendor.camera.gyro.disable=0 \
-persist.vendor.camera.isp.clock.optmz=0 \
-persist.vendor.camera.stats.test=5 \
-persist.vendor.camera.CDS=off \
 persist.camera.HAL3.enabled=1
+
+# system property to accelerate Progressive Download using STA
+PRODUCT_PROPERTY_OVERRIDES += \
+persist.mm.sta.enable=0
+
+#property to enable user to access Google WFD settings
+PRODUCT_PROPERTY_OVERRIDES += \
+persist.debug.wfd.enable=1
+
+#property to enable VDS WFD solution
+PRODUCT_PROPERTY_OVERRIDES += \
+persist.hwc.enable_vds=1
+
+#Simulate sdcard on /data/media
+PRODUCT_PROPERTY_OVERRIDES += \
+persist.fuse_sdcard=true

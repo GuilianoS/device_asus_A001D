@@ -25,6 +25,7 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/product_launched_with_o_mr1.mk
 
 # Overlays
 DEVICE_PACKAGE_OVERLAYS += $(LOCAL_PATH)/overlay
+DEVICE_PACKAGE_OVERLAYS += $(LOCAL_PATH)/overlay-lineage
 
 PRODUCT_ENFORCE_RRO_TARGETS := \
 framework-res
@@ -51,7 +52,6 @@ frameworks/native/data/etc/android.hardware.camera.flash-autofocus.xml:$(TARGET_
 frameworks/native/data/etc/android.hardware.camera.front.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.camera.front.xml \
 frameworks/native/data/etc/android.hardware.camera.raw.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.camera.raw.xml \
 frameworks/native/data/etc/android.hardware.camera.full.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.full.front.xml \
-frameworks/native/data/etc/android.hardware.consumerir.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.consumerir.xml \
 frameworks/native/data/etc/android.hardware.fingerprint.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.fingerprint.xml \
 frameworks/native/data/etc/android.hardware.location.gps.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.location.gps.xml \
 frameworks/native/data/etc/android.hardware.opengles.aep.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.opengles.aep.xml \
@@ -103,8 +103,8 @@ libqcompostprocbundle \
 libvolumelistener
 
 # Fingerprint
-PRODUCT_PACKAGES += \
-android.hardware.biometrics.fingerprint@2.1
+#PRODUCT_PACKAGES += \
+#android.hardware.biometrics.fingerprint@2.1
 
 # Audio configuration
 PRODUCT_COPY_FILES += \
@@ -155,27 +155,30 @@ libhwbinder.vendor
 
 # Camera
 PRODUCT_PACKAGES += \
-Snap \
-camera.common@1.0-impl \
-camera.device@3.2-impl \
-camera.device@3.3-impl \
-camera.device@3.4-impl \
-camera.device@3.4-extermal-impl \
-android.hardware.camera.provider@2.4-impl \
-android.hardware.camera.provider@2.4-service \
-vendor.qti.hardware.camera.device@1.0 \
-libgui_vendor \
-libfui \
-libshims_camera
-
+  android.hardware.camera.common@1.0 \
+  android.hardware.camera.device@1.0-impl \
+  android.hardware.camera.device@3.2-impl \
+  android.hardware.camera.device@3.3-impl \
+  android.hardware.camera.device@3.4-impl \
+  android.hardware.camera.device@3.4-external-impl \
+  android.hardware.camera.provider@2.4-impl \
+  android.hardware.camera.provider@2.4-service \
+  android.hardware.camera.provider@2.5 \
+  vendor.qti.hardware.camera.device@1.0 \
+  vendor.qti.hardware.camera.device@1.0.vendor \
+  libgui_vendor \
+  libfui \
+  libshims_camera \
+  libui
+    
 # Component overrides
 PRODUCT_COPY_FILES += \
 $(LOCAL_PATH)/configs/sysconfig/component-overrides.xml:$(TARGET_COPY_OUT_VENDOR)/etc/sysconfig/component-overrides.xml
 
 # ConsumerIr
-PRODUCT_PACKAGES += \
-android.hardware.ir@1.0-impl \
-android.hardware.ir@1.0-service
+#PRODUCT_PACKAGES += \
+#android.hardware.ir@1.0-impl \
+#android.hardware.ir@1.0-service
 
 # Dex
 PRODUCT_DEXPREOPT_SPEED_APPS += \
@@ -289,9 +292,16 @@ $(LOCAL_PATH)/configs/sysconfig/sec_config:$(TARGET_COPY_OUT_VENDOR)/etc/sec_con
 
 # Media
 PRODUCT_COPY_FILES += \
-$(LOCAL_PATH)/configs/media/media_codecs.xml::$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs.xml \
+$(LOCAL_PATH)/configs/media/media_codecs_performance_8953.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_performance_8953.xml \
+$(LOCAL_PATH)/configs/media/media_profiles_8953_v1.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_profiles_8953_v1.xml \
+$(LOCAL_PATH)/configs/media/media_codecs_8953_v1.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_8953_v1.xml \
+$(LOCAL_PATH)/configs/media/media_codecs_8953.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_8953.xml \
+$(LOCAL_PATH)/configs/media/media_codecs_performance_8953_v1.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_performance_8953_v1.xml \
+$(LOCAL_PATH)/configs/media/media_codecs.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs.xml \
+$(LOCAL_PATH)/configs/media/media_profiles_vendor.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_profiles_vendor.xml \
+$(LOCAL_PATH)/configs/media/media_profiles_V1_0.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_profiles_V1_0.xml \
 $(LOCAL_PATH)/configs/media/media_codecs_performance.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_performance.xml \
-$(LOCAL_PATH)/configs/media/media_profiles_V1_0.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_profiles_V1_0.xml
+$(LOCAL_PATH)/configs/media/media_profiles.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_profiles.xml
 
 # libstagefright
 PRODUCT_COPY_FILES += \

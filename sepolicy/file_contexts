@@ -56,5 +56,10 @@
 /sys/devices(/platform)?/soc/78b7000\.i2c/i2c-3/3-[0-9a-f]+/disable_keys        u:object_r:proc_touchpanel:s0
 
 # Root folders
-/firmware(/.*)?    u:object_r:firmware_file:s0
-/persist(/.*)?     u:object_r:mnt_vendor_file:s0
+/firmware(/.*)?    	u:object_r:firmware_file:s0
+/persist(/.*)?     	u:object_r:mnt_vendor_file:s0
+/ADF(/.*)?		u:object_r:adf_file:s0
+/ADF/boot(/.*)?	u:object_r:adf_file:s0
+/APD(/.*)?		u:object_r:apd_file:s0
+/factory(/.*)?		u:object_r:factory_file:s0
+/asusfw(/.*)?		u:object_r:asusfw_file:s0

@@ -1,0 +1,18 @@
+on post-fs-data
+	#betterlife figerprint
+    mkdir /data/vendor/blfp 0700 system  system
+
+#service btlfpserver /vendor/bin/hw/btlfpserver
+#    class late_start
+#    user system
+
+on boot
+    #goodix fingerprint
+    chown system system /dev/goodix_fp
+    chmod 0666 /dev/goodix_fp
+    #betterlife fingerprint
+    chown system system /dev/blfp
+    chmod 0666 /dev/blfp
+    #check usb connector temperture and disable charger or otg
+    chmod 0666 /sys/class/power_supply/battery/charging_enabled
+    chmod 0666 /sys/class/power_supply/usb/usb_otg
