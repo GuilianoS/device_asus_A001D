@@ -249,11 +249,8 @@ ro.com.google.rlz_ap_whitelist=y0,y5,y6,y7,y9
 
 # Camera
 PRODUCT_PROPERTY_OVERRIDES += \
-vidc.enc.dcvs.extra-buff-count=2 \
-persist.vendor.camera.display.lmax=1280x720 \
-persist.vendor.camera.display.umax=1920x1080 \
-vendor.camera.hal1.packagelist=com.skype.raider,com.google.android.talk,com.whatsapp \
-persist.camera.HAL3.enabled=1
+persist.vendor.camera.expose.aux=1 \
+persist.vendor.camera.HAL3.enabled=1
 
 # system property to accelerate Progressive Download using STA
 PRODUCT_PROPERTY_OVERRIDES += \
