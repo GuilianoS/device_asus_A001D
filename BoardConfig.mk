@@ -31,7 +31,7 @@ TARGET_2ND_CPU_VARIANT := cortex-a53
 
 TARGET_BOARD_PLATFORM := msm8953
 TARGET_BOARD_SUFFIX := _64
-TARGET_OTA_ASSERT_DEVICE := A001D,ASUS_A001D,ASUS_A001D_1,ASUS_A001D_2
+TARGET_OTA_ASSERT_DEVICE := A001D,ASUS_A001D,ASUS_A001D_2
 
 # Broken Rules
 BUILD_BROKEN_DUP_RULES := true
@@ -93,6 +93,9 @@ BLUETOOTH_HCI_USE_MCT := true
 USE_DEVICE_SPECIFIC_CAMERA := true
 TARGET_USES_QTI_CAMERA_DEVICE := true
 BOARD_QTI_CAMERA_32BIT_ONLY := true
+TARGET_TS_MAKEUP := true
+TARGET_PROCESS_SDK_VERSION_OVERRIDE := \
+    /vendor/bin/mm-qcamera-daemon=28
 
 # Shims
 TARGET_LD_SHIM_LIBS := /vendor/lib/hw/camera.msm8953.so|libshims_camera.so
@@ -113,6 +116,10 @@ TARGET_USES_HWC2 := true
 OVERRIDE_RS_DRIVER := libRSDriver_adreno.so
 MAX_EGL_CACHE_KEY_SIZE := 12*1024
 MAX_EGL_CACHE_SIZE := 2048*1024
+
+# Power
+TARGET_PROVIDES_POWERHAL := true
+TARGET_TAP_TO_WAKE_NODE := "/proc/gesture/onoff"
 
 # DRM
 TARGET_ENABLE_MEDIADRM_64 := true
@@ -157,16 +164,12 @@ BOARD_CACHEIMAGE_PARTITION_SIZE := 268435456
 BOARD_RECOVERYIMAGE_PARTITION_SIZE := 67108864
 BOARD_VENDORIMAGE_PARTITION_SIZE := 838860800
 BOARD_ROOT_EXTRA_SYMLINKS := \
-/vendor/dsp:/dsp \
-/vendor/firmware_mnt:/firmware \
-/mnt/vendor/persist:/persist
+	/vendor/dsp:/dsp \
+	/vendor/firmware_mnt:/firmware \
+	/mnt/vendor/persist:/persist
 
 # Peripheral manager
 TARGET_PER_MGR_ENABLED := true
-
-# Power
-TARGET_USES_INTERACTION_BOOST := true
-TARGET_TAP_TO_WAKE_NODE := "/proc/touchpanel/wakeup_gesture"
 
 # Qualcomm
 BOARD_USES_QCOM_HARDWARE := true
