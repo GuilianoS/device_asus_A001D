@@ -53,7 +53,6 @@ PRODUCT_COPY_FILES += \
 	frameworks/native/data/etc/android.hardware.camera.front.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.camera.front.xml \
 	frameworks/native/data/etc/android.hardware.camera.raw.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.camera.raw.xml \
 	frameworks/native/data/etc/android.hardware.camera.full.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.full.front.xml \
-	frameworks/native/data/etc/android.hardware.fingerprint.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.fingerprint.xml \
 	frameworks/native/data/etc/android.hardware.location.gps.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.location.gps.xml \
 	frameworks/native/data/etc/android.hardware.opengles.aep.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.opengles.aep.xml \
 	frameworks/native/data/etc/android.hardware.sensor.accelerometer.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.sensor.accelerometer.xml \
@@ -80,6 +79,12 @@ PRODUCT_COPY_FILES += \
 	frameworks/native/data/etc/android.software.print.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.software.print.xml \
 	frameworks/native/data/etc/android.software.sip.voip.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.software.sip.voip.xml \
 	frameworks/native/data/etc/handheld_core_hardware.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/handheld_core_hardware.xml
+
+# Fingerprint
+#PRODUCT_COPY_FILES += \
+#	frameworks/native/data/etc/android.hardware.fingerprint.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.fingerprint.xml
+#PRODUCT_PACKAGES += \
+#android.hardware.biometrics.fingerprint@2.1
 
 # ANT
 PRODUCT_PACKAGES += \
@@ -115,10 +120,6 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
 	android.hardware.configstore@1.1 \
 	android.hardware.configstore@1.1-service
-
-# Fingerprint
-#PRODUCT_PACKAGES += \
-#android.hardware.biometrics.fingerprint@2.1
 
 # Audio configuration
 PRODUCT_COPY_FILES += \
@@ -165,7 +166,9 @@ PRODUCT_COPY_FILES += \
 # Binder
 PRODUCT_PACKAGES += \
 	libhwbinder \
-	libhwbinder.vendor
+	libhwbinder.vendor \
+	libbinder \
+	libbinder.vendor
 
 # Camera
 PRODUCT_PACKAGES += \
@@ -174,11 +177,13 @@ PRODUCT_PACKAGES += \
 	android.hardware.camera.provider@2.4-service \
 	camera.device@1.0-impl \
 	camera.device@3.2-impl \
+	camera.device@3.3-impl \
+	camera.device@3.4-impl \
 	vendor.qti.hardware.camera.device@1.0 \
 	vendor.qti.hardware.camera.device@1.0.vendor \
-	libshims_camera \
-	libfui \
-	libgui_vendor
+	libgui_vendor \
+	android.hardware.camera.common@1.0 \
+	libshims_camera
     
 # Component overrides
 PRODUCT_COPY_FILES += \
@@ -277,11 +282,7 @@ PRODUCT_PACKAGES += \
 PRODUCT_COPY_FILES += \
 	$(LOCAL_PATH)/configs/keylayout/fts_ts.kl:$(TARGET_COPY_OUT_VENDOR)/usr/keylayout/fts_ts.kl \
 	$(LOCAL_PATH)/configs/keylayout/gpio-keys.kl:$(TARGET_COPY_OUT_VENDOR)/usr/keylayout/gpio-keys.kl \
-	$(LOCAL_PATH)/configs/keylayout/msm8953-snd-card-mtp_Button_Jack.kl:$(TARGET_COPY_OUT_VENDOR)/usr/keylayout/msm8953-snd-card-mtp_Button_Jack.kl \
-	$(LOCAL_PATH)/configs/keylayout/synaptics_dsx.kl:$(TARGET_COPY_OUT_VENDOR)/usr/keylayout/synaptics_dsx.kl \
-	$(LOCAL_PATH)/configs/keylayout/synaptics_dsxv26.kl:$(TARGET_COPY_OUT_VENDOR)/usr/keylayout/synaptics_dsxv26.kl \
-	$(LOCAL_PATH)/configs/keylayout/synaptics_rmi4_i2c.kl:$(TARGET_COPY_OUT_VENDOR)/usr/keylayout/synaptics_rmi4_i2c.kl \
-	$(LOCAL_PATH)/configs/keylayout/uinput-goodix.kl:$(TARGET_COPY_OUT_VENDOR)/usr/keylayout/uinput-goodix.kl
+	$(LOCAL_PATH)/configs/keylayout/msm8953-snd-card-mtp_Button_Jack.kl:$(TARGET_COPY_OUT_VENDOR)/usr/keylayout/msm8953-snd-card-mtp_Button_Jack.kl
 
 # IRQ
 PRODUCT_COPY_FILES += \

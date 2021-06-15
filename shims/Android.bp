@@ -16,7 +16,10 @@
 
 cc_library_shared {
     name: "libshims_camera",
+
     srcs: ["DisplayEventReceiver.cpp"],
+    shared_libs: ["libgui_vendor"],
+
     compile_multilib: "32",
     soc_specific: true,
 } 

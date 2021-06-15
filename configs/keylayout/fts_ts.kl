@@ -18,11 +18,8 @@
 # This file is no longer used as the platform's default keyboard layout.
 # Refer to Generic.kl instead.
 #
-key 17    GESTURE_W
-key 18    GESTURE_E
-key 31    GESTURE_S
-key 44    GESTURE_Z
-key 46    GESTURE_C
-key 47    GESTURE_V
-key 116   GESTURE_DOUBLE_CLICK
-key 117   GESTURE_SWIPE_UP
+key 143    WAKEUP   # Double-tap
+key 158    BACK               VIRTUAL
+key 139    APP_SWITCH         VIRTUAL
+key 102    HOME               VIRTUAL
+key 257    WAKEUP   # Swipe-up

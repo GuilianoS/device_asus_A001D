@@ -94,7 +94,7 @@
     <!-- Whether the display cutout region of the main built-in display should be forced to
          black in software (to avoid aliasing or emulate a cutout that is not physically existent).
     -->
-     <bool name="config_fillMainBuiltInDisplayCutout">false</bool>
+     <bool name="config_fillMainBuiltInDisplayCutout">true</bool>
 
     <!-- Is the device capable of hot swapping an ICC Card -->
      <bool name="config_hotswapCapable">true</bool>
@@ -333,7 +333,9 @@
          appended after the path string to interpret coordinates in dp instead of px units.
          Note that a physical cutout should be configured in pixels for the best results.
     -->
-     <string name="config_mainBuiltInDisplayCutout">M 0,0 L -138, 0 L -119.0, 55 L 119.0, 55 L 138, 0 Z</string>
+     <string name="config_mainBuiltInDisplayCutout">M -62.7815,-0.3000 C -59.2755,-0.3003,-56.1283,1.8499,-54.8541,5.1161 L -54.8541,5.1161 L -49.8504,17.9347 L -49.8504,17.9347 C -47.7061,23.4175,-42.4317,27.0354,-36.5444,27.0615 L 36.3945,27.0615 C 42.2697,27.0253,47.5284,23.4083,49.6630,17.9347 L 49.6630,17.9347 L 54.6667,5.1161 L 54.6667,5.1161 C 55.9467,1.8371,59.1121,-0.3158,62.6316,-0.3000 Z @dp</string>
+
+     <bool name="config_maskMainBuiltInDisplayCutout">true</bool>
 
     <!-- MMS user agent string -->
      <string name="config_mms_user_agent">Android-Mms/2.0</string>
@@ -573,4 +575,5 @@
 
     <!-- Enable Zram writeback feature to allow unused pages in zram be written to flash. -->
     <bool name="config_zramWriteback">true</bool>
+
 </resources>

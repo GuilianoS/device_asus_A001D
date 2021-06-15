@@ -50,10 +50,6 @@ on fs
     restorecon_recursive /mnt/vendor/persist
 
     #write /sys/kernel/boot_adsp/boot 1
-
-    wait /dev/block/bootdevice/by-name/oem
-    mount ext4 /dev/block/bootdevice/by-name/oem /oem ro nosuid nodev barrier=1
-
 on post-fs
     start vendor.qseecomd
     exec - system system -- /vendor/bin/init.qti.qseecomd.sh
@@ -73,6 +69,9 @@ on post-fs-data
     mkdir /persist/data/tz 0700 system system
     mkdir /data/misc/dts 0770 media audio
     mkdir /data/vendor/hbtp 0750 system system
+    #Create folder for mm-qcamera-daemon
+    mkdir /data/vendor/camera 0770 camera camera
+    mkdir /data/misc/camera 0770 camera camera
 
 on early-boot
     chown system system /mnt/vendor/persist/sensors
@@ -86,10 +85,6 @@ on early-boot
     chown system system /mnt/vendor/persist/sensors/registry/sns_reg_version
     chown system system /mnt/vendor/persist/sensors/registry/config
     chmod 0664 /mnt/vendor/persist/sensors/sensors_settings
-
-#Create folder for mm-qcamera-daemon
-    mkdir /data/vendor/camera 0770 camera camera
-    mkdir /data/misc/camera 0770 camera camera
 
 #start camera server as daemon
 service qcamerasvr /system/vendor/bin/mm-qcamera-daemon

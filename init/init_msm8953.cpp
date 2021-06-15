@@ -104,11 +104,4 @@ void vendor_load_properties()
     property_override("dalvik.vm.heaptargetutilization", heaptargetutilization);
     property_override("dalvik.vm.heapminfree", heapminfree);
     property_override("dalvik.vm.heapmaxfree", heapmaxfree);
-    
-    // Magisk Hide
-    property_override("ro.boot.verifiedbootstate", "green");
-    property_override("ro.boot.vbmeta.device_state", "locked");
-    property_override("ro.boot.veritymode", "enforcing");
-    property_override("ro.build.type", "user");
-    property_override("ro.build.tags", "release-keys");
 }
