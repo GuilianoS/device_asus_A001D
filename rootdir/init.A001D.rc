@@ -2,9 +2,9 @@ on post-fs-data
 	#betterlife figerprint
     mkdir /data/vendor/blfp 0700 system  system
 
-#service btlfpserver /vendor/bin/hw/btlfpserver
-#    class late_start
-#    user system
+service btlfpserver /vendor/bin/hw/btlfpserver
+    class late_start
+    user system
 
 on boot
     #goodix fingerprint
