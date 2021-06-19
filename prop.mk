@@ -101,9 +101,9 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
 	drm.service.enabled=true
 
-# Fingerprint
-#PRODUCT_PROPERTY_OVERRIDES += \
-#	persist.qfp=false
+Fingerprint
+PRODUCT_PROPERTY_OVERRIDES += \
+	persist.qfp=false
 
 # Fm
 PRODUCT_PROPERTY_OVERRIDES += \

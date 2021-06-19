@@ -29,7 +29,7 @@ DEVICE_PACKAGE_OVERLAYS += \
   $(LOCAL_PATH)/overlay-lineage
 
 PRODUCT_ENFORCE_RRO_TARGETS := \
-	framework-res
+    framework-res
 
 # Board
 PRODUCT_USES_QCOM_HARDWARE := true
@@ -78,13 +78,13 @@ PRODUCT_COPY_FILES += \
 	frameworks/native/data/etc/android.software.midi.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.software.midi.xml \
 	frameworks/native/data/etc/android.software.print.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.software.print.xml \
 	frameworks/native/data/etc/android.software.sip.voip.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.software.sip.voip.xml \
-	frameworks/native/data/etc/handheld_core_hardware.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/handheld_core_hardware.xml
+	frameworks/native/data/etc/handheld_core_hardware.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/handheld_core_hardware.xml \
+	frameworks/native/data/etc/android.hardware.fingerprint.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.fingerprint.xml
+
 
 # Fingerprint
-#PRODUCT_COPY_FILES += \
-#	frameworks/native/data/etc/android.hardware.fingerprint.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.fingerprint.xml
-#PRODUCT_PACKAGES += \
-#android.hardware.biometrics.fingerprint@2.1
+PRODUCT_PACKAGES += \
+	android.hardware.biometrics.fingerprint@2.1
 
 # ANT
 PRODUCT_PACKAGES += \
@@ -426,10 +426,6 @@ PRODUCT_COPY_FILES += \
 	$(LOCAL_PATH)/configs/sensors/hals.conf:$(TARGET_COPY_OUT_VENDOR)/etc/sensors/hals.conf \
 	$(LOCAL_PATH)/configs/sensors/sensor_def_qcomdev.conf:$(TARGET_COPY_OUT_VENDOR)/etc/sensors/sensor_def_qcomdev.conf
 
-# Tethering
-PRODUCT_PACKAGES += \
-	TetheringConfigOverlay
-
 # Thermal
 PRODUCT_COPY_FILES += \
 	$(LOCAL_PATH)/configs/thermal/thermal-engine.conf:$(TARGET_COPY_OUT_VENDOR)/etc/thermal-engine.conf
@@ -486,7 +482,9 @@ PRODUCT_PACKAGES += \
 	dhcpcd.conf \
 	wificond \
 	wpa_supplicant \
-	wpa_supplicant.conf
+	wpa_supplicant.conf \
+	TetheringConfigOverlay \
+    WifiOverlay
 
 # Wi-FI
 PRODUCT_COPY_FILES += \
