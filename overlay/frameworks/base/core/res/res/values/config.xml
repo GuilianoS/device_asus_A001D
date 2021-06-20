@@ -41,7 +41,7 @@
                 <string ...>M -5,0 L -5,10 L 5,10 L 5,0 Z @dp</string>
          @see https://www.w3.org/TR/SVG/paths.html#PathData
          -->
-    <string translatable="false" name="config_mainBuiltInDisplayCutout">M -186,0 L -186,94 L 186,94 L 186,0 Z</string>
+    <string translatable="false" name="config_mainBuiltInDisplayCutout">M -62.7815,-0.3000 C -59.2755,-0.3003,-56.1283,1.8499,-54.8541,5.1161 L -54.8541,5.1161 L -49.8504,17.9347 L -49.8504,17.9347 C -47.7061,23.4175,-42.4317,27.0354,-36.5444,27.0615 L 36.3945,27.0615 C 42.2697,27.0253,47.5284,23.4083,49.6630,17.9347 L 49.6630,17.9347 L 54.6667,5.1161 L 54.6667,5.1161 C 55.9467,1.8371,59.1121,-0.3158,62.6316,-0.3000 Z @dp</string>
 
     <!-- Specify if the fingerprint hardware support gestures-->
     <bool name="config_fingerprintSupportsGestures">true</bool>
