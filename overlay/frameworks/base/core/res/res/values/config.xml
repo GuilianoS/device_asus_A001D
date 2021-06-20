@@ -26,6 +26,16 @@
     <!-- Whether device has a notch -->
     <bool name="config_haveNotch">true</bool>
 
+       <!-- Height of the status bar -->
+    <dimen name="status_bar_height">81.px</dimen>
+    <dimen name="status_bar_height_portrait">81.0px</dimen>
+    <dimen name="status_bar_height_landscape">81.0px</dimen>
+
+    <!-- Whether the display cutout region of the main built-in display should be forced to
+         black in software (to avoid aliasing or emulate a cutout that is not physically existent).
+     -->
+    <bool name="config_fillMainBuiltInDisplayCutout">true</bool>
+
     <!-- The bounding path of the cutout region of the main built-in display.
          Must either be empty if there is no cutout region, or a string that is parsable by
          {@link android.util.PathParser}.
@@ -35,13 +45,18 @@
          To facilitate writing device-independent emulation overlays, the marker `@dp` can be
          appended after the path string to interpret coordinates in dp instead of px units.
          Note that a physical cutout should be configured in pixels for the best results.
-         Example for a 10px x 10px square top-center cutout:
-                <string ...>M -5,0 L -5,10 L 5,10 L 5,0 Z</string>
-         Example for a 10dp x 10dp square top-center cutout:
-                <string ...>M -5,0 L -5,10 L 5,10 L 5,0 Z @dp</string>
-         @see https://www.w3.org/TR/SVG/paths.html#PathData
          -->
-    <string translatable="false" name="config_mainBuiltInDisplayCutout">M -62.7815,-0.3000 C -59.2755,-0.3003,-56.1283,1.8499,-54.8541,5.1161 L -54.8541,5.1161 L -49.8504,17.9347 L -49.8504,17.9347 C -47.7061,23.4175,-42.4317,27.0354,-36.5444,27.0615 L 36.3945,27.0615 C 42.2697,27.0253,47.5284,23.4083,49.6630,17.9347 L 49.6630,17.9347 L 54.6667,5.1161 L 54.6667,5.1161 C 55.9467,1.8371,59.1121,-0.3158,62.6316,-0.3000 Z @dp</string>
+    <string translatable="false" name="config_mainBuiltInDisplayCutout">
+        M 0,0
+        L -58, 0
+        L -40.9940446283, 10.0595537175
+        L -35, 31
+        L -35, 10.0595537175
+        L 35.2, 10.0595537175
+        L 35, 31
+        Z @dp
+    </string>
+
 
     <!-- Specify if the fingerprint hardware support gestures-->
     <bool name="config_fingerprintSupportsGestures">true</bool>
@@ -54,10 +69,6 @@
 
     <!-- Whether or not swipe up gesture is enabled by default -->
     <bool name="config_swipe_up_gesture_default">true</bool>
-
-    <!-- Height of the status bar -->
-    <dimen name="status_bar_height_portrait">94.0px</dimen>
-    <dimen name="status_bar_height_landscape">24.0dp</dimen>
     
       <!-- Whether a software navigation bar should be shown. NOTE: in the future this may be
          autodetected from the Configuration. -->
