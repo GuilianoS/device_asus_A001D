@@ -195,26 +195,21 @@ PRODUCT_DEXPREOPT_SPEED_APPS += \
 
 # Display
 PRODUCT_PACKAGES += \
-	android.hardware.graphics.allocator@2.0-impl \
-	android.hardware.graphics.allocator@2.0-service \
-	android.hardware.graphics.composer@2.1-impl \
-	android.hardware.graphics.composer@2.1-service \
-	android.hardware.graphics.mapper@2.0-impl-2.1 \
-	android.hardware.memtrack@1.0-impl \
-	android.hardware.memtrack@1.0-service \
-	vendor.display.color@1.0-service \
-	vendor.display.color@1.0-impl \
-	copybit.msm8953 \
-	gralloc.msm8953 \
-	hwcomposer.msm8953 \
-	memtrack.msm8953 \
-	libdisplayconfig \
-	libqdMetaData \
-	libqdMetaData.vendor \
-	libgenlock \
-	libtinyxml \
-	vendor.display.config@1.0.vendor \
-	vendor.display.config@2.0
+    android.hardware.graphics.allocator@2.0-impl \
+    android.hardware.graphics.allocator@2.0-service \
+    android.hardware.graphics.composer@2.1-impl \
+    android.hardware.graphics.composer@2.1-service \
+    android.hardware.graphics.mapper@2.0-impl-2.1 \
+    android.hardware.memtrack@1.0-impl \
+    android.hardware.memtrack@1.0-service \
+    copybit.msm8953 \
+    gralloc.msm8953 \
+    hwcomposer.msm8953 \
+    memtrack.msm8953 \
+    libdisplayconfig \
+    libqdMetaData.system \
+    libgenlock \
+    libtinyxml
 
 # Lights
 PRODUCT_PACKAGES += \
@@ -228,9 +223,9 @@ PRODUCT_PACKAGES += \
 
 # DRM
 PRODUCT_PACKAGES += \
-  	android.hardware.drm@1.0-impl \
-  	android.hardware.drm@1.0-service \
-  	android.hardware.drm@1.3-service.clearkey
+	android.hardware.drm@1.0-impl \
+	android.hardware.drm@1.0-service \
+	android.hardware.drm@1.3-service.clearkey
 
 # FM
 PRODUCT_PACKAGES += \
@@ -276,7 +271,7 @@ PRODUCT_PACKAGES += \
 # IMS
 PRODUCT_PACKAGES += \
 	ims-ext-common \
-    ims_ext_common.xml
+	ims_ext_common.xml
 
 # Keylayout
 PRODUCT_COPY_FILES += \
@@ -314,6 +309,7 @@ PRODUCT_COPY_FILES += \
 # OMX
 PRODUCT_PACKAGES += \
 	libc2dcolorconvert \
+	libmm-omxcore \
 	libOmxAacEnc \
 	libOmxAmrEnc \
 	libOmxCore \
@@ -322,22 +318,7 @@ PRODUCT_PACKAGES += \
 	libOmxSwVencHevc \
 	libOmxVdec \
 	libOmxVenc \
-	libstagefrighthw \
-	libmm-omxcore \
-	libOmxAacDec \
-	libOmxAacEnc \
-	libOmxAmrEnc \
-	libOmxEvrcEnc \
-	libOmxMp3Dec \
-	libOmxQcelp13Enc \
-	libOmxAc3HwDec \
-	liblasic \
-	libOmxVdec \
-	libOmxVdecHevc \
-	libOmxVenc \
-	libOmxVidEnc \
-	libOmxSwVdec \
-	libOmxSwVencMpeg4
+	libstagefrighthw
 
 # Perf
 PRODUCT_PACKAGES += \
@@ -348,9 +329,7 @@ PRODUCT_PACKAGES += \
 
 # Power
 PRODUCT_PACKAGES += \
-	power.qcom \
-	android.hardware.power@1.0-impl \
-	android.hardware.power@1.0-service
+	android.hardware.power-service-qti
 
 PRODUCT_COPY_FILES += \
 	$(LOCAL_PATH)/configs/power/powerhint.xml:$(TARGET_COPY_OUT_VENDOR)/etc/powerhint.xml
@@ -371,7 +350,8 @@ PRODUCT_PACKAGES += \
 	init.qcom.sh \
 	init.qcom.usb.rc \
 	init.target.rc \
-	ueventd.qcom.rc
+	ueventd.qcom.rc \
+	init.A001D.rc
 
 PRODUCT_PACKAGES += \
 	init.qcom.bt.sh \
@@ -399,8 +379,8 @@ PRODUCT_PACKAGES += \
 	android.hardware.radio@1.4 \
 	android.hardware.radio.config@1.2 \
 	android.hardware.secure_element@1.0 \
-  	librmnetctl \
-  	libcnefeatureconfig \
+	librmnetctl \
+  libcnefeatureconfig \
 	libxml2 \
 	qti-telephony-hidl-wrapper \
 	qti_telephony_hidl_wrapper.xml \
@@ -431,9 +411,9 @@ PRODUCT_COPY_FILES += \
 	$(LOCAL_PATH)/configs/thermal/thermal-engine.conf:$(TARGET_COPY_OUT_VENDOR)/etc/thermal-engine.conf
 
 PRODUCT_PACKAGES += \
-    android.hardware.thermal@1.0-impl \
-    android.hardware.thermal@1.0-service \
-    thermal.msm8953
+	android.hardware.thermal@1.0-impl \
+	android.hardware.thermal@1.0-service \
+	thermal.msm8953
 
 # USB HAL
 PRODUCT_PACKAGES += \
@@ -484,7 +464,7 @@ PRODUCT_PACKAGES += \
 	wpa_supplicant \
 	wpa_supplicant.conf \
 	TetheringConfigOverlay \
-    WifiOverlay
+	WifiOverlay
 
 # Wi-FI
 PRODUCT_COPY_FILES += \

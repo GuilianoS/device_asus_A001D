@@ -302,12 +302,12 @@
     <hal format="hidl">
         <name>vendor.display.config</name>
         <transport>hwbinder</transport>
-        <version>2.0</version>
+        <version>1.9</version>
         <interface>
             <name>IDisplayConfig</name>
             <instance>default</instance>
         </interface>
-        <fqname>@2.0::IDisplayConfig/default</fqname>
+        <fqname>@1.9::IDisplayConfig/default</fqname>
     </hal>
     <hal format="hidl">
         <name>vendor.display.postproc</name>
@@ -338,16 +338,6 @@
             <instance>default</instance>
         </interface>
         <fqname>@2.1::IFactory/default</fqname>
-    </hal>
-    <hal format="hidl">
-        <name>android.hardware.power</name>
-        <transport>hwbinder</transport>
-        <version>1.0</version>
-        <interface>
-            <name>IPower</name>
-            <instance>default</instance>
-        </interface>
-        <fqname>@1.0::IPower/default</fqname>
     </hal>
     <hal format="hidl">
         <name>vendor.qti.esepowermanager</name>

@@ -1,1 +1,0 @@
-allow irsc_util irsc_util:capability sys_admin;

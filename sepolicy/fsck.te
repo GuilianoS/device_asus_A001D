@@ -1,2 +1,0 @@
-allow fsck tmpfs:blk_file r_file_perms;
-allow fsck fsck:capability sys_admin;

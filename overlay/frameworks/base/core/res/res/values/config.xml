@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-    Copyright (C) 2018 The LineageOS Project
+    Copyright (C) 2017 The LineageOS Project
+
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
     You may obtain a copy of the License at
+
         http://www.apache.org/licenses/LICENSE-2.0
+
     Unless required by applicable law or agreed to in writing, software
     distributed under the License is distributed on an "AS IS" BASIS,
     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -14,63 +17,7 @@
 
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
 
-    <!-- Control whether the always on display mode is available. This should only be enabled on
-         devices where the display has been tuned to be power efficient in DOZE and/or DOZE_SUSPEND
-         states. -->
-    <bool name="config_dozeAlwaysOnDisplayAvailable">true</bool>
-
-    <!-- Control whether the always on display mode is enabled by default. This value will be used
-         during initialization when the setting is still null. -->
-    <bool name="config_dozeAlwaysOnEnabled">false</bool>
-
-    <!-- Whether device has a notch -->
-    <bool name="config_haveNotch">true</bool>
-
-       <!-- Height of the status bar -->
-    <dimen name="status_bar_height">81.px</dimen>
-    <dimen name="status_bar_height_portrait">81.0px</dimen>
-    <dimen name="status_bar_height_landscape">81.0px</dimen>
-
-    <!-- Whether the display cutout region of the main built-in display should be forced to
-         black in software (to avoid aliasing or emulate a cutout that is not physically existent).
-     -->
-    <bool name="config_fillMainBuiltInDisplayCutout">true</bool>
-
-    <!-- The bounding path of the cutout region of the main built-in display.
-         Must either be empty if there is no cutout region, or a string that is parsable by
-         {@link android.util.PathParser}.
-         The path is assumed to be specified in display coordinates with pixel units and in
-         the display's native orientation, with the origin of the coordinate system at the
-         center top of the display.
-         To facilitate writing device-independent emulation overlays, the marker `@dp` can be
-         appended after the path string to interpret coordinates in dp instead of px units.
-         Note that a physical cutout should be configured in pixels for the best results.
-         -->
-    <string translatable="false" name="config_mainBuiltInDisplayCutout">
-        M 0,0
-        L -58, 0
-        L -40.9940446283, 10.0595537175
-        L -35, 31
-        L -35, 10.0595537175
-        L 35.2, 10.0595537175
-        L 35, 31
-        Z @dp
-    </string>
-
-
-    <!-- Specify if the fingerprint hardware support gestures-->
-    <bool name="config_fingerprintSupportsGestures">true</bool>
-
-    <!-- Enable system navigation keys. -->
-    <bool name="config_supportSystemNavigationKeys">true</bool>
-
-    <!-- Whether or not swipe up gesture's opt-in setting is available on this device -->
-    <bool name="config_swipe_up_gesture_setting_available">true</bool>
-
-    <!-- Whether or not swipe up gesture is enabled by default -->
-    <bool name="config_swipe_up_gesture_default">true</bool>
-    
-      <!-- Whether a software navigation bar should be shown. NOTE: in the future this may be
+    <!-- Whether a software navigation bar should be shown. NOTE: in the future this may be
          autodetected from the Configuration. -->
     <bool name="config_showNavigationBar">true</bool>
 
@@ -79,136 +26,118 @@
          available on some devices. -->
     <bool name="config_enableHapticTextHandle">true</bool>
 
+    <!-- Control whether the always on display mode is enabled by default. This value will be used
+         during initialization when the setting is still null. -->
+    <bool name="config_dozeAlwaysOnEnabled">false</bool>
+
     <!-- Flag indicating whether the we should enable the automatic brightness in Settings.
          Software implementation will be used if config_hardware_auto_brightness_available is not set -->
     <bool name="config_automatic_brightness_available">true</bool>
 
-    <!-- User activity timeout: Maximum screen dim duration as a percentage of screen off timeout.
-         This resource is similar to config_maximumScreenDimDuration but the maximum
-         screen dim duration is defined as a ratio of the overall screen off timeout
-         instead of as an absolute value in milliseconds.  This is useful for reducing
-         the dim duration when the screen off timeout is very short.
-         When computing the screen dim duration, the power manager uses the lesser
-         of the effective durations expressed by config_maximumScreenDimDuration and
-         config_maximumScreenDimRatio.
-         This value must be between 0% and 100%.  If the value is zero, the screen will not
-         dim before the device goes to sleep.
-    -->
-    <fraction name="config_maximumScreenDimRatio">29.999996%</fraction>
-
-    <!-- Stability requirements in milliseconds for accepting a new brightness level.  This is used
-         for debouncing the light sensor.  Different constants are used to debounce the light sensor
-         when adapting to brighter or darker environments.  This parameter controls how quickly
-         brightness changes occur in response to an observed change in light level that exceeds the
-         hysteresis threshold. -->
-
-    <integer name="config_autoBrightnessBrighteningLightDebounce">2000</integer>
-    <integer name="config_autoBrightnessDarkeningLightDebounce">4000</integer>
-
-    <!-- Default screen brightness setting.
-         Must be in the range specified by minimum and maximum. -->
-    <integer name="config_screenBrightnessSettingDefault">128</integer>
-
-    <!-- Screen brightness used to dim the screen when the user activity
-         timeout expires.  May be less than the minimum allowed brightness setting
-         that can be set by the user. -->
-    <integer name="config_screenBrightnessDim">1</integer>
-
     <!-- Array of light sensor LUX values to define our levels for auto backlight brightness support.
-         The N entries of this array define N  1 zones as follows:
-
-         Zone 0:        0 <= LUX < array[0]
-         Zone 1:        array[0] <= LUX < array[1]
+         The N entries of this array define N + 1 control points as follows:
+         (1-based arrays)
+         Point 1:            (0, value[1]):             lux <= 0
+         Point 2:     (level[1], value[2]):  0        < lux <= level[1]
+         Point 3:     (level[2], value[3]):  level[2] < lux <= level[3]
          ...
-         Zone N:        array[N - 1] <= LUX < array[N]
-         Zone N + 1     array[N] <= LUX < infinity
-
+         Point N+1: (level[N], value[N+1]):  level[N] < lux
+         The control points must be strictly increasing.  Each control point
+         corresponds to an entry in the brightness backlight values arrays.
+         For example, if LUX == level[1] (first element of the levels array)
+         then the brightness will be determined by value[2] (second element
+         of the brightness values array).
+         Spline interpolation is used to determine the auto-brightness
+         backlight values for LUX levels between these control points.
          Must be overridden in platform specific overlays -->
-    <integer-array name="config_autoBrightnessLevels">
-        <item>1</item>
-        <item>2</item>
+     <integer-array name="config_autoBrightnessLevels">
         <item>3</item>
-        <item>4</item>
-        <item>8</item>
-        <item>12</item>
-        <item>20</item>
-        <item>33</item>
-        <item>55</item>
-        <item>90</item>
-        <item>148</item>
+        <item>50</item>
+        <item>80</item>
+        <item>130</item>
+        <item>190</item>
         <item>245</item>
-        <item>403</item>
-        <item>665</item>
-        <item>1097</item>
-        <item>1808</item>
-        <item>2981</item>
-        <item>5000</item>
-
+        <item>300</item>
+        <item>400</item>
+        <item>500</item>
+        <item>800</item>
+        <item>1200</item>
+        <item>1600</item>
+        <item>2300</item>
+        <item>3200</item>
+        <item>4500</item>
+        <item>6700</item>
+        <item>8000</item>
+        <item>10000</item>
     </integer-array>
 
     <!-- Array of desired screen brightness in nits corresponding to the lux values
          in the config_autoBrightnessLevels array. As with config_screenBrightnessMinimumNits and
          config_screenBrightnessMaximumNits, the display brightness is defined as the measured
          brightness of an all-white image.
-
          If this is defined then:
             - config_autoBrightnessLcdBacklightValues should not be defined
             - config_screenBrightnessNits must be defined
             - config_screenBrightnessBacklight must be defined
-
          This array should have size one greater than the size of the config_autoBrightnessLevels
          array. The brightness values must be non-negative and non-decreasing. This must be
          overridden in platform specific overlays -->
     <array name="config_autoBrightnessDisplayValuesNits">
-        <item>10.45935</item>   <!-- 0-1 -->
-        <item>29.25559</item>   <!-- 1-2 -->
-        <item>34.240692</item>  <!-- 2-3 -->
-        <item>37.514347</item>  <!-- 3-4 -->
-        <item>40.018696</item>  <!-- 4-8 -->
-        <item>46.885098</item>  <!-- 8-12 -->
-        <item>51.626434</item>  <!-- 12-20 -->
-        <item>58.610405</item>  <!-- 20-33 -->
-        <item>66.890915</item>  <!-- 33-55 -->
-        <item>77.61644</item>   <!-- 55-90 -->
-        <item>90.221886</item>  <!-- 90-148 -->
-        <item>105.80314</item>  <!-- 148-245 -->
-        <item>126.073845</item> <!-- 245-403 -->
-        <item>154.16931</item>  <!-- 403-665 -->
-        <item>191.83717</item>  <!-- 665-1097 -->
-        <item>240.74442</item>  <!-- 1097-1808 -->
-        <item>294.84857</item>  <!-- 1808-2981 -->
-        <item>348.05453</item>  <!-- 2981-5000 -->
-        <item>389.70</item>     <!-- 5000+ -->
+        <item>29.12119</item> <!-- 0-3 -->
+        <item>42.91431</item> <!-- 3-50 -->
+        <item>48.79835</item> <!-- 50-80 -->
+        <item>53.55009</item> <!-- 80-130 -->
+        <item>55.82432</item> <!-- 130-190 -->
+        <item>62.71869</item> <!-- 190-245 -->
+        <item>65.70109</item> <!-- 245-300 -->
+        <item>70.88509</item> <!-- 300-400 -->
+        <item>76.82643</item> <!-- 400-500 -->
+        <item>80.45491</item> <!-- 500-800 -->
+        <item>88.80091</item> <!-- 800-1200 -->
+        <item>94.31048</item> <!-- 1200-1600 -->
+        <item>113.96108</item> <!-- 1600-2300 -->
+        <item>129.60004</item> <!-- 2300-3200 -->
+        <item>143.40004</item> <!-- 3200-4500 -->
+        <item>160.87507</item> <!-- 4500-6700 -->
+        <item>216.21131</item> <!-- 6700-8000 -->
+        <item>300.83717</item> <!-- 8000-10000 -->
+        <item>399.02401</item> <!-- 10000+ -->
     </array>
-
-
-    <!-- Minimum screen brightness setting allowed by the power manager.
-         The user is forbidden from setting the brightness below this level. -->
-    <integer name="config_screenBrightnessSettingMinimum">1</integer>
 
     <!-- An array describing the screen's backlight values corresponding to the brightness
          values in the config_screenBrightnessNits array.
-
          This array should be equal in size to config_screenBrightnessBacklight. -->
     <integer-array name="config_screenBrightnessBacklight">
-        <item>0</item>
-        <item>15</item>
-        <item>30</item>
-        <item>45</item>
-        <item>60</item>
-        <item>75</item>
-        <item>90</item>
-        <item>105</item>
-        <item>120</item>
-        <item>135</item>
-        <item>150</item>
-        <item>165</item>
-        <item>180</item>
-        <item>195</item>
-        <item>210</item>
-        <item>225</item>
-        <item>240</item>
-        <item>255</item>
+        <item>0</item> <!-- 0% -->
+        <item>10</item> <!-- 4% -->
+        <item>28</item> <!-- 11% -->
+        <item>38</item> <!-- 15% -->
+        <item>52</item> <!-- 20% -->
+        <item>62</item> <!-- 24% -->
+        <item>72</item> <!-- 28% -->
+        <item>76</item> <!-- 30% -->
+        <item>86</item> <!-- 34% -->
+        <item>97</item> <!-- 38% -->
+        <item>105</item> <!-- 41% -->
+        <item>115</item> <!-- 45% -->
+        <item>122</item> <!-- 48% -->
+        <item>128</item> <!-- 50% -->
+        <item>132</item> <!-- 52% -->
+        <item>140</item> <!-- 55% -->
+        <item>150</item> <!-- 59% -->
+        <item>158</item> <!-- 62% -->
+        <item>166</item> <!-- 65% -->
+        <item>173</item> <!-- 68% -->
+        <item>179</item> <!-- 70% -->
+        <item>184</item> <!-- 72% -->
+        <item>191</item> <!-- 75% -->
+        <item>199</item> <!-- 78% -->
+        <item>207</item> <!-- 81% -->
+        <item>217</item> <!-- 85% -->
+        <item>224</item> <!-- 88% -->
+        <item>237</item> <!-- 93% -->
+        <item>245</item> <!-- 96% -->
+        <item>255</item> <!-- 100% -->
     </integer-array>
 
     <!-- An array of floats describing the screen brightness in nits corresponding to the backlight
@@ -216,28 +145,60 @@
          should be measured with an all white image while the display is in the fully on state.
          Note that this value should *not* reflect the maximum brightness value for any high
          brightness modes but only the maximum brightness value obtainable in a sustainable manner.
-
          This array should be equal in size to config_screenBrightnessBacklight -->
     <array name="config_screenBrightnessNits">
-        <item>0</item>
-        <item>26.11</item>
-        <item>50.5</item>
-        <item>74.17</item>
-        <item>96.89</item>
-        <item>118.3</item>
-        <item>139.8</item>
-        <item>162.9</item>
-        <item>189.8</item>
-        <item>217.4</item>
-        <item>240.4</item>
-        <item>265.3</item>
-        <item>288.7</item>
-        <item>316</item>
-        <item>340.8</item>
-        <item>357.9</item>
-        <item>376.2</item>
-        <item>392.9</item>
+        <item>0</item> <!-- 0% -->
+        <item>29.1</item> <!-- 4% -->
+        <item>32.7</item> <!-- 11% -->
+        <item>33.9</item> <!-- 15% -->
+        <item>36.6</item> <!-- 20% -->
+        <item>38.2</item> <!-- 24% -->
+        <item>40.3</item> <!-- 28% -->
+        <item>42.5</item> <!-- 30% -->
+        <item>48.4</item> <!-- 34% -->
+        <item>53.2</item> <!-- 38% -->
+        <item>55.5</item> <!-- 41% -->
+        <item>61.3</item> <!-- 45% -->
+        <item>65.6</item> <!-- 48% -->
+        <item>70.2</item> <!-- 50% -->
+        <item>76.2</item> <!-- 52% -->
+        <item>80.3</item> <!-- 55% -->
+        <item>88.7</item> <!-- 59% -->
+        <item>94.1</item> <!-- 62% -->
+        <item>103.9</item> <!-- 65% -->
+        <item>113.9</item> <!-- 68% -->
+        <item>120.8</item> <!-- 70% -->
+        <item>129.6</item> <!-- 72% -->
+        <item>143.4</item> <!-- 75% -->
+        <item>160.8</item> <!-- 78% -->
+        <item>184.3</item> <!-- 81% -->
+        <item>216.2</item> <!-- 85% -->
+        <item>242.6</item> <!-- 88% -->
+        <item>300.8</item> <!-- 93% -->
+        <item>347.3</item> <!-- 96% -->
+        <item>385.7</item> <!-- 100% -->
     </array>
+
+    <!-- Screen brightness used to dim the screen when the user activity
+         timeout expires.  May be less than the minimum allowed brightness setting
+         that can be set by the user. -->
+    <integer name="config_screenBrightnessDim">10</integer>
+
+    <!-- Default screen brightness setting.
+         Must be in the range specified by minimum and maximum. -->
+    <integer name="config_screenBrightnessSettingDefault">46</integer>
+
+    <!-- Minimum screen brightness setting allowed by the power manager.
+         The user is forbidden from setting the brightness below this level. -->
+    <integer name="config_screenBrightnessSettingMinimum">1</integer>
+
+    <!-- Stability requirements in milliseconds for accepting a new brightness level.  This is used
+         for debouncing the light sensor.  Different constants are used to debounce the light sensor
+         when adapting to brighter or darker environments.  This parameter controls how quickly
+         brightness changes occur in response to an observed change in light level that exceeds the
+         hysteresis threshold. -->
+    <integer name="config_autoBrightnessBrighteningLightDebounce">2000</integer>
+    <integer name="config_autoBrightnessDarkeningLightDebounce">4000</integer>
 
     <!-- Is the notification LED intrusive? Used to decide if there should be a disable option -->
     <bool name="config_intrusiveNotificationLed">true</bool>
@@ -327,14 +288,14 @@
          carrier provisioning. If false: hard disabled. If true: then depends on carrier
          provisioning, availability etc -->
     <bool name="config_carrier_volte_available">true</bool>
-    
-    <!-- Flag specifying whether VT should be available for carrier: independent of
-          carrier provisioning. If false: hard disabled. If true: then depends on carrier
-          provisioning, availability etc -->
-    <bool name="config_carrier_vt_available">true</bool>
 
     <!-- Flag specifying whether VT is available on device -->
     <bool name="config_device_vt_available">true</bool>
+
+    <!-- Flag specifying whether VT should be available for carrier: independent of
+         carrier provisioning. If false: hard disabled. If true: then depends on carrier
+         provisioning, availability etc -->
+    <bool name="config_carrier_vt_available">true</bool>
 
     <!-- Config determines whether to update phone object when voice registration
          state changes. Voice radio tech change will always trigger an update of
@@ -405,6 +366,11 @@
     <!-- Flag specifying whether WFC over IMS is available on device -->
     <bool name="config_device_wfc_ims_available">true</bool>
 
+    <!-- Flag specifying whether WFC over IMS should be available for carrier: independent of
+         carrier provisioning. If false: hard disabled. If true: then depends on carrier
+         provisioning, availability etc -->
+    <bool name="config_carrier_wfc_ims_available">true</bool>
+
     <!-- Whether device supports double tap to wake -->
     <bool name="config_supportDoubleTapWake">true</bool>
 
@@ -429,22 +395,17 @@
         <item>"/system/lib64/libsurfaceflinger.so"</item>
     </string-array>
 
-    <!-- List of files pinned by the Pinner Service with the JIT Zygote boot image b/119800099 -->
-    <string-array translatable="false" name="config_jitzygoteBootImagePinnerServiceFiles">
-        <item>"/system/framework/framework.jar"</item>
-        <item>"/system/framework/services.jar"</item>
-        <item>"/apex/com.android.art/javalib/core-oj.jar"</item>
-        <item>"/apex/com.android.art/javalib/core-libart.jar"</item>
-        <item>"/apex/com.android.media/javalib/updatable-media.jar"</item>
-        <item>"/system_ext/priv-app/SystemUI/SystemUI.apk"</item>
-        <item>"/system/lib64/libsurfaceflinger.so"</item>
-    </string-array>
+    <!-- Should the pinner service pin the Camera application? -->
+    <bool name="config_pinnerCameraApp">true</bool>
 
     <!-- Should the pinner service pin the Home application? -->
     <bool name="config_pinnerHomeApp">true</bool>
 
     <!-- Flag indicating whether we should enable smart battery. -->
     <bool name="config_smart_battery_available">true</bool>
+
+    <!-- Whether the always on display mode is available. -->
+    <bool name="config_dozeAlwaysOnDisplayAvailable">true</bool>
 
     <!-- Whether the display blanks itself when transition from a doze to a non-doze state -->
     <bool name="config_displayBlanksAfterDoze">false</bool>
@@ -461,7 +422,7 @@
          * The remote submix module "audio.r_submix.default" must be installed on the device.
          * The device must be provisioned with HDCP keys (for protected content). -->
     <bool name="config_enableWifiDisplay">true</bool>
-  
+
     <!-- Set this to true to enable the platform's auto-power-save modes like doze and
          app standby.  These are not enabled by default because they require a standard
          cloud-to-device messaging service for apps to interact correctly with the modes
@@ -477,8 +438,8 @@
          or a single SIM device can have 1 phones/logical modems, but 2 physical slots (one eSIM
          and one pSIM) -->
     <integer name="config_num_physical_slots">2</integer>
-    <!-- The list of components which should be automatically disabled for a specific package. --> 
-    <string-array name="config_disabledComponents" translatable="false"> 
+    <!-- The list of components which should be automatically disabled for a specific package. -->
+    <string-array name="config_disabledComponents" translatable="false">
         <item>com.google.android.gms/com.google.android.gms.nearby.messages.service.NearbyMessagesService</item>
     </string-array>
 
@@ -506,6 +467,54 @@
     -->
     <string name="config_defaultAutofillService" translatable="false">com.google.android.gms/.autofill.service.AutofillService</string>
 
+    <!-- Whether device has a notch -->
+    <bool name="config_haveNotch">true</bool>
+
+    <!-- Specify if the fingerprint hardware support gestures-->
+    <bool name="config_fingerprintSupportsGestures">true</bool>
+
+    <!-- Enable system navigation keys. -->
+    <bool name="config_supportSystemNavigationKeys">true</bool>
+
+    <!-- Whether or not swipe up gesture's opt-in setting is available on this device -->
+    <bool name="config_swipe_up_gesture_setting_available">true</bool>
+
+    <!-- Whether or not swipe up gesture is enabled by default -->
+    <bool name="config_swipe_up_gesture_default">true</bool>
+
+    <string translatable="false" name="config_mainBuiltInDisplayCutout">
+        M -204.5 0
+        C -188.5 0 -178.8 8.8 -177.2 10.2
+        C -171.3 15.3 -169.7 18.1 -167.4 20.6
+        C -165.1 23.1 -160.5 30.8 -159.1 33.2
+        C -157.7 35.5 -155.4 41.5 -154 44.3
+        C -152.5 47.4 -151.3 50.7 -147.1 58
+        C -142.9 65.5 -137.2 70.3 -137.2 70.3
+        C -137.2 70.3 -134.2 73.5 -128.4 76.4
+        C -120.7 80.2 -105.4 80.9 -105.4 80.9
+        L 0 80.9
+        L 105.5 80.9
+        C 105.5 80.9 120.7 80.2 128.4 76.4
+        C 134.2 73.5 137.2 70.3 137.2 70.3
+        C 137.2 70.3 142.9 65.5 147.2 58
+        C 151.3 50.7 152.5 47.4 154 44.3
+        C 155.4 41.5 157.7 35.5 159.1 33.2
+        C 160.5 30.8 165.1 23.1 167.4 20.6
+        C 169.7 18.1 171.3 15.3 177.2 10.2
+        C 178.8 8.8 188.5 0 204.5 0
+        L 0 0
+        L 0 0
+        L -204.5 0
+        Z
+    </string>
+
+    <!-- Height of the status bar -->
+    <dimen name="status_bar_height_portrait">81px</dimen>
+    <dimen name="status_bar_height_landscape">81px</dimen>
+
+    <dimen name="rounded_corner_radius_top">90px</dimen>
+    <dimen name="rounded_corner_radius_bottom">90px</dimen>
+
     <!-- List of biometric sensors on the device, in decreasing strength. Consumed by AuthService
          when registering authenticators with BiometricService. Format must be ID:Modality:Strength,
          where: IDs are unique per device, Modality as defined in BiometricAuthenticator.java,
@@ -514,9 +523,4 @@
         <item>0:2:15</item> <!-- ID0:Fingerprint:Strong -->
     </string-array>
 
-    <!-- Flag indicating whether the surface flinger has limited
-         alpha compositing functionality in hardware.  If set, the window
-         manager will disable alpha trasformation in animations where not
-         strictly needed. -->
-    <bool name="config_sf_limitedAlpha">true</bool>
 </resources>

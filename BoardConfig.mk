@@ -1,19 +1,3 @@
-#
-# Copyright (C) 2017-2019 The LineageOS Project
-#
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#      http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
-#
-
 DEVICE_PATH := device/asus/A001D
 
 # Architecture
@@ -41,7 +25,8 @@ BUILD_BROKEN_VINTF_PRODUCT_COPY_FILES := true
 
 # Kernel
 BOARD_KERNEL_BASE := 0x80000000
-BOARD_KERNEL_CMDLINE := console=ttyHSL0,115200,n8 androidboot.console=ttyHSL0 androidboot.hardware=qcom msm_rtb.filter=0x237 ehci-hcd.park=3 lpm_levels.sleep_disabled=1 androidboot.bootdevice=7824900.sdhci earlycon=msm_hsl_uart,0x78af000 firmware_class.path=/vendor/firmware_mnt/image loop.max_part=7 androidboot.usbconfigfs=false androidboot.selinux androidboot.selinux=permissive
+BOARD_KERNEL_CMDLINE += console=ttyHSL0,115200,n8 androidboot.console=ttyHSL0 androidboot.hardware=qcom msm_rtb.filter=0x237 ehci-hcd.park=3 lpm_levels.sleep_disabled=1 androidboot.bootdevice=7824900.sdhci earlycon=msm_hsl_uart,0x78af000 firmware_class.path=/vendor/firmware_mnt/image loop.max_part=7 androidboot.usbconfigfs=false
+BOARD_KERNEL_CMDLINE += androidboot.selinux androidboot.selinux=permissive
 BOARD_KERNEL_IMAGE_NAME := Image.gz-dtb
 BOARD_KERNEL_PAGESIZE :=  2048
 BOARD_MKBOOTIMG_ARGS := --ramdisk_offset 0x01000000 --tags_offset 0x00000100
@@ -91,14 +76,13 @@ BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := $(DEVICE_PATH)/configs/bluetooth
 BOARD_HAVE_BLUETOOTH_QCOM := true
 BLUETOOTH_HCI_USE_MCT := true
 
-
 # Camera
 USE_DEVICE_SPECIFIC_CAMERA := true
 BOARD_QTI_CAMERA_32BIT_ONLY := true
-TARGET_TS_MAKEUP := true
 TARGET_USES_QTI_CAMERA_DEVICE := true
+
 TARGET_PROCESS_SDK_VERSION_OVERRIDE := \
-    /vendor/bin/mm-qcamera-daemon=27
+    /vendor/bin/mm-qcamera-daemon=28
 
 # Shims
 TARGET_LD_SHIM_LIBS := /vendor/lib/hw/camera.msm8953.so|libshims_camera.so
@@ -129,8 +113,7 @@ TARGET_QCOM_DISPLAY_VARIANT := caf-msm8996
 TARGET_QCOM_MEDIA_VARIANT := caf-msm8996
 
 # Power
-TARGET_PROVIDES_POWERHAL := true
-TARGET_TAP_TO_WAKE_NODE := "/proc/gesture/onoff"
+TARGET_TAP_TO_WAKE_NODE := "/proc/touchpanel/wakeup_gesture"
 
 # DRM
 TARGET_ENABLE_MEDIADRM_64 := true
@@ -196,7 +179,7 @@ VENDOR_SECURITY_PATCH := 2018-08-05
 
 # SELinux
 include device/qcom/sepolicy-legacy-um/SEPolicy.mk
-BOARD_VENDOR_SEPOLICY_DIRS += $(DEVICE_PATH)/sepolicy
+BOARD_VENDOR_SEPOLICY_DIRS += $(DEVICE_PATH)/sepolicy/vendor
 
 # Soong namespaces
 PRODUCT_SOONG_NAMESPACES += $(DEVICE_PATH)

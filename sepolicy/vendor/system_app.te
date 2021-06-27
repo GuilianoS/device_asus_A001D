@@ -1,0 +1,6 @@
+allow system_app sysfs_zram:dir r_dir_perms;
+allow system_app sysfs_zram:file r_file_perms;
+allow system_app wificond:binder call;
+
+# fm_radio app needes  open read write on fm_radio_device
+allow system_app fm_radio_device:chr_file r_file_perms;

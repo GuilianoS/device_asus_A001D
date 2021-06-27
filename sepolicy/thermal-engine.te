@@ -1,3 +1,0 @@
-allow thermal-engine sysfs:dir r_dir_perms;
-r_dir_file(thermal-engine, sysfs)
-allow thermal-engine thermal-engine:capability sys_admin;
