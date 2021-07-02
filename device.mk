@@ -173,16 +173,13 @@ PRODUCT_PACKAGES += \
 # Camera
 PRODUCT_PACKAGES += \
 	Snap \
-	android.hardware.camera.provider@2.4-impl \
-	android.hardware.camera.provider@2.4-service \
-	camera.device@1.0-impl \
-	camera.device@3.2-impl \
-	camera.device@3.3-impl \
-	camera.device@3.4-impl \
-	vendor.qti.hardware.camera.device@1.0 \
-	vendor.qti.hardware.camera.device@1.0.vendor \
+    camera.device@1.0-impl \
+    camera.device@3.4-impl \
+    android.hardware.camera.provider@2.4-impl \
+    android.hardware.camera.provider@2.4-service \
+    vendor.qti.hardware.camera.device@1.0 \
+    vendor.qti.hardware.camera.device@1.0_vendor \
 	libgui_vendor \
-	android.hardware.camera.common@1.0 \
 	libshims_camera
     
 # Component overrides
@@ -209,7 +206,8 @@ PRODUCT_PACKAGES += \
     libdisplayconfig \
     libqdMetaData.system \
     libgenlock \
-    libtinyxml
+    libtinyxml \
+    libvulkan
 
 # Lights
 PRODUCT_PACKAGES += \
@@ -309,15 +307,20 @@ PRODUCT_COPY_FILES += \
 # OMX
 PRODUCT_PACKAGES += \
 	libc2dcolorconvert \
+    android.hardware.media.omx \
+    libextmedia_jni \
+	libc2dcolorconvert \
 	libmm-omxcore \
 	libOmxAacEnc \
 	libOmxAmrEnc \
 	libOmxCore \
 	libOmxEvrcEnc \
+	libOmxG711Enc \
 	libOmxQcelp13Enc \
 	libOmxSwVencHevc \
 	libOmxVdec \
 	libOmxVenc \
+	libOmxVidcCommon \
 	libstagefrighthw
 
 # Perf
@@ -329,7 +332,9 @@ PRODUCT_PACKAGES += \
 
 # Power
 PRODUCT_PACKAGES += \
-	android.hardware.power-service-qti
+    power.qcom \
+    android.hardware.power@1.0-impl \
+    android.hardware.power@1.0-service
 
 PRODUCT_COPY_FILES += \
 	$(LOCAL_PATH)/configs/power/powerhint.xml:$(TARGET_COPY_OUT_VENDOR)/etc/powerhint.xml
@@ -351,7 +356,7 @@ PRODUCT_PACKAGES += \
 	init.qcom.usb.rc \
 	init.target.rc \
 	ueventd.qcom.rc \
-	init.A001D.rc
+	init.asus.rc
 
 PRODUCT_PACKAGES += \
 	init.qcom.bt.sh \
@@ -361,8 +366,7 @@ PRODUCT_PACKAGES += \
 
 PRODUCT_PACKAGES += \
 	init.recovery.qcom.rc \
-	init.recovery.qcom.usb.rc \
-	init.A001D.rc
+	init.recovery.qcom.usb.rc
 
 # RCS
 PRODUCT_PACKAGES += \
@@ -380,7 +384,7 @@ PRODUCT_PACKAGES += \
 	android.hardware.radio.config@1.2 \
 	android.hardware.secure_element@1.0 \
 	librmnetctl \
-  libcnefeatureconfig \
+	libcnefeatureconfig \
 	libxml2 \
 	qti-telephony-hidl-wrapper \
 	qti_telephony_hidl_wrapper.xml \
