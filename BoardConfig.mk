@@ -30,7 +30,7 @@ BOARD_KERNEL_CMDLINE += androidboot.selinux androidboot.selinux=permissive
 BOARD_KERNEL_IMAGE_NAME := Image.gz-dtb
 BOARD_KERNEL_PAGESIZE :=  2048
 BOARD_MKBOOTIMG_ARGS := --ramdisk_offset 0x01000000 --tags_offset 0x00000100
-TARGET_KERNEL_SOURCE := kernel/A001D/msm-3.18
+TARGET_KERNEL_SOURCE := kernel/asus/A001D/msm-3.18
 TARGET_KERNEL_CONFIG := A001D_defconfig
 TARGET_KERNEL_VERSION := 3.18
 TARGET_PREBUILT_KERNEL := $(DEVICE_PATH)/Image.gz-dtb
